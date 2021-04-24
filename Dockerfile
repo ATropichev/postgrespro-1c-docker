@@ -103,7 +103,8 @@ VOLUME /var/lib/postgresql/data
 #	/opt/pgpro/1c-$PG_MAJOR/bin/pg-setup initdb --tune=1c --locale=ru_RU.UTF-8;
 
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
+RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
+	&& ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # We set the default STOPSIGNAL to SIGINT, which corresponds to what PostgreSQL
