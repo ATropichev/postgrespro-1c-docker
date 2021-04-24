@@ -99,12 +99,12 @@ ENV PGDATA /var/lib/postgresql/data
 RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PGDATA"
 VOLUME /var/lib/postgresql/data
 
-RUN set -ex; \
-	/opt/pgpro/1c-$PG_MAJOR/bin/pg-setup initdb --tune=1c --locale=ru_RU.UTF-8;
+#RUN set -ex; \
+#	/opt/pgpro/1c-$PG_MAJOR/bin/pg-setup initdb --tune=1c --locale=ru_RU.UTF-8;
 
-#COPY docker-entrypoint.sh /usr/local/bin/
-#RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
-#ENTRYPOINT ["docker-entrypoint.sh"]
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 # We set the default STOPSIGNAL to SIGINT, which corresponds to what PostgreSQL
 # calls "Fast Shutdown mode" wherein new connections are disallowed and any
