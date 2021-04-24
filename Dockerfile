@@ -99,7 +99,9 @@ ENV PGDATA /var/lib/postgresql/data
 RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PGDATA"
 VOLUME /var/lib/postgresql/data
 
-#RUN set -ex; \
+RUN set -ex; \
+# Запуск "оптимизации под 1С"
+	/opt/pgpro/1c-$PG_MAJOR/share/1c.tune;
 #	/opt/pgpro/1c-$PG_MAJOR/bin/pg-setup initdb --tune=1c --locale=ru_RU.UTF-8;
 
 COPY docker-entrypoint.sh /usr/local/bin/
