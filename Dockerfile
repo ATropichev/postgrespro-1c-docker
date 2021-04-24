@@ -99,7 +99,7 @@ RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PG
 VOLUME /var/lib/postgresql/data
 
 RUN set -ex; \
-	/opt/pgpro/std-12/bin/pg-setup initdb --tune=1c --locale=ru_RU.UTF-8;
+	/opt/pgpro/1c-$PG_MAJOR/bin/pg-setup initdb --tune=1c --locale=ru_RU.UTF-8;
 
 #COPY docker-entrypoint.sh /usr/local/bin/
 #RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
