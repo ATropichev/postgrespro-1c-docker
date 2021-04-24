@@ -53,8 +53,8 @@ RUN set -eux; \
 		! grep -q '/usr/share/locale' /etc/dpkg/dpkg.cfg.d/docker; \
 	fi; \
 	apt-get update; apt-get install -y --no-install-recommends locales; rm -rf /var/lib/apt/lists/*; \
-	localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-ENV LANG en_US.utf8
+	localedef -i ru_RU -c -f UTF-8 -A /usr/share/locale/locale.alias ru_RU.UTF-8
+ENV LANG ru_RU.utf8
 
 RUN set -eux; \
 	apt-get update; \
