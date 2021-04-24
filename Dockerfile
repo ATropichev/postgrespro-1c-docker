@@ -71,7 +71,17 @@ RUN set -eux; \
 RUN mkdir /docker-entrypoint-initdb.d
 
 RUN set -ex; \
-	wget -O - http://repo.postgrespro.ru/keys/GPG-KEY-POSTGRESPRO | apt-key add -
+#	wget -O - http://repo.postgrespro.ru/keys/GPG-KEY-POSTGRESPRO | apt-key add -
+#pub   rsa2048 2015-07-08 [SC]
+#      AE12 BB39 29E6 2B65 B5D7  F0C0 7F9A E5A6 2D2D F0B4
+#uid         [ неизвестно ] Robot (Signing repos) <dba@postgrespro.ru>
+	key='AE12BB3929E62B65B5D7F0C07F9AE5A62D2DF0B4'; \
+	export GNUPGHOME="$(mktemp -d)"; \
+	gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+	gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
+	command -v gpgconf > /dev/null && gpgconf --kill all; \
+	rm -rf "$GNUPGHOME"; \
+	apt-key list
 
 ENV PG_MAJOR 13
 #ENV PG_VERSION 13.2-1
