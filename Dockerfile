@@ -70,6 +70,8 @@ RUN set -eux; \
 	rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /docker-entrypoint-initdb.d
+COPY postgresql.conf.sh /docker-entrypoint-initdb.d
+RUN chmod 777 /docker-entrypoint-initdb.d/postgresql.conf.sh
 
 RUN set -ex; \
 #pub   rsa2048 2015-07-08 [SC]
