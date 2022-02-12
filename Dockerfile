@@ -85,7 +85,7 @@ RUN set -ex; \
 	rm -rf "$GNUPGHOME"; \
 	apt-key list
 
-ENV PG_MAJOR 13
+ENV PG_MAJOR 14
 #ENV PG_VERSION 13.2-1
 
 RUN set -ex; \
