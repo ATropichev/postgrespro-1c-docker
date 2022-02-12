@@ -79,7 +79,7 @@ RUN set -ex; \
 #uid         [ неизвестно ] Robot (Signing repos) <dba@postgrespro.ru>
 	key='AE12BB3929E62B65B5D7F0C07F9AE5A62D2DF0B4'; \
 	export GNUPGHOME="$(mktemp -d)"; \
-	gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+	gpg --batch --keyserver keys.openpgp.org --recv-keys "$key"; \
 	gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
 	command -v gpgconf > /dev/null && gpgconf --kill all; \
 	rm -rf "$GNUPGHOME"; \
